@@ -72,7 +72,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: development ? 'http://localhost:8080' : 'https://api.moviethesis.com'
+    baseURL: development ? 'http://localhost:8080' : 'https://moviethesis.ew.r.appspot.com'
   },
   /*
    ** Build configuration
