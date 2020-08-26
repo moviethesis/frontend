@@ -5,11 +5,15 @@
       <li
       v-for="movie in selectedMovies"
       :key="movie.movieId"
-      class="col-span-1 flex flex-col text-center bg-black rounded-lg shadow-lg"
+      class="inline-block relative col-span-1 flex flex-col text-center bg-black rounded-lg shadow-lg hover:bg-blue-500 transition ease-in-out duration-150"
       >
-        <button v-on:click="movieClicked(movie)">
+        <button v-on:click="movieClicked(movie)" class="focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150">
           <img class="mx-auto bg-gray-800 rounded-tl-lg rounded-tr-lg" :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
           <p class="text-base text-md text-gray-300 p-2">{{ movie.title }}</p>
+          <p
+            class="absolute top-0 left-0 block m-3 p-2 rounded-full text-white shadow-solid bg-green-400 font-bold transition ease-in-out duration-150"
+            v-bind:class="isMovieIn(movie)"
+          >selected</p>
         </button>
       </li>
     </ul>
@@ -23,11 +27,15 @@
         <li
         v-for="movie in movies"
         :key="movie.movieId"
-        class="col-span-1 flex flex-col text-center bg-black rounded-lg shadow-lg"
+        class="inline-block relative col-span-1 flex flex-col text-center bg-black rounded-lg shadow-lg hover:bg-blue-500 transition ease-in-out duration-150"
         >
-          <button v-on:click="movieClicked(movie)">
+          <button v-on:click="movieClicked(movie)" class="focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150">
             <img class="mx-auto bg-gray-800 rounded-tl-lg rounded-tr-lg" :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
             <p class="text-base text-md text-gray-300 p-2">{{ movie.title }}</p>
+            <p
+              class="absolute top-0 left-0 block m-3 p-2 rounded-full text-white shadow-solid bg-green-400 font-bold transition ease-in-out duration-150"
+              v-bind:class="isMovieIn(movie)"
+            >selected</p>
           </button>
         </li>
       </ul>
@@ -49,6 +57,11 @@
       }
     },
     methods: {
+      isMovieIn: function(movie) {
+        if (!this.selectedMovies.includes(movie)) {
+          return "hidden"
+        }
+      },
       movieClicked: function(movie) {
         this.$store.dispatch("movieTapped", { movie })
       }

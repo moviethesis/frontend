@@ -1,3 +1,5 @@
+let development = process.env.NODE_ENV !== 'production'
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -69,10 +71,17 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: development ? 'http://localhost:8080' : 'https://api.moviethesis.com'
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+
+  env: {
+    DEV_API: 'http://localhost:8080',
+    PROD_API: 'https://api.moviethesis.com'
+  }
 }

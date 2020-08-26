@@ -41,7 +41,7 @@ export const actions = {
         headers.userID = userID
       }
     }
-    await this.$axios.get('http://localhost:8080/api/start', { withCredentials: true, headers })
+    await this.$axios.get('/', { withCredentials: true, headers })
       .then((res) => {
         if (res.status === 200) {
           commit('setUser', res.data)
@@ -52,7 +52,7 @@ export const actions = {
       })
   },
   async loadTopList({ commit }) {
-    await this.$axios.get('http://localhost:8080/api/toplist', { withCredentials: true })
+    await this.$axios.get('/toplist', { withCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           commit('setTop100', res.data)
