@@ -18,8 +18,8 @@
       </li>
     </ul>
 
-    <main class="text-gray-400 mt-10">
-      <h2 class="text-gray-200 text-2xl font-black">Top 100 movies</h2>
+    <main class="text-gray-400 mt-10 mb-64">
+      <h2 class="text-gray-200 text-2xl font-black">Top Movie List</h2>
       <p class="text-base text-xl text-gray-300 mb-6">
         Select your 5 favorite movies from this list
       </p>
@@ -41,6 +41,31 @@
       </ul>
     </main>
 
+    <div class="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 sm:mx-24">
+      <div class="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div v-bind:class="footerbg" class="p-2 rounded-lg shadow-lg sm:p-3">
+          <div class="flex justify-between sm:flex-row flex-col">
+            <div class="flex-1 flex items-center">
+              <span v-bind:class="footerIconBG" class="flex p-2 rounded-lg ">
+                <svg viewBox="0 0 20 20" fill="currentColor" v-bind:class="hideInfomark" class="h-6 w-6 text-white"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" v-bind:class="showCheckmark" class="h-6 w-6 text-white"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              </span>
+              <p class="ml-3 font-medium text-white">
+                {{ footerText }}
+              </p>
+            </div>
+            <div class="order-3 mt-2 sm:mt-0 flex-shrink-0 w-full sm:order-2 sm:w-auto">
+              <div class="rounded-md shadow-sm">
+                <nuxt-link to="/recommend" v-bind:class="isContinueActive" class="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
+                  Continue
+                  <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-3 h-3 ml-2"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +76,45 @@
     computed: {
       movies() {
         return this.$store.state.top100
+      },
+      selectedCount() {
+        return 5 - this.selectedMovies.length
+      },
+      footerbg() {
+        if (this.selectedMovies.length === 5) {
+          return "bg-green-600"
+        } else {
+          return "bg-blue-600"
+        }
+      },
+      footerIconBG() {
+        if (this.selectedMovies.length === 5) {
+          return "bg-green-800"
+        } else {
+          return "bg-blue-800"
+        }
+      },
+      showCheckmark() {
+        if (this.selectedMovies.length !== 5) {
+          return "hidden"
+        }
+      },
+      hideInfomark() {
+        if (this.selectedMovies.length === 5) {
+          return "hidden"
+        }
+      },
+      footerText() {
+        if (this.selectedMovies.length !== 5) {
+          return `Please select ${this.selectedCount} movies to continue!`
+        } else {
+          return "You have selected 5 movies, please click continue!"
+        }
+      },
+      isContinueActive() {
+        if (this.selectedMovies.length !== 5) {
+          return "cursor-not-allowed hover:none bg-gray-500"
+        }
       },
       selectedMovies() {
         return this.$store.state.user.selectedMovies
@@ -67,8 +131,8 @@
       }
     },
     async fetch({ store }) {
-      await store.dispatch("loadUser")
       await store.dispatch("loadTopList")
+      await store.dispatch("loadUser")
     }
   }
 </script>

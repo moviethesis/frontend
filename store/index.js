@@ -1,6 +1,7 @@
 export const state = () => ({
   user: {},
-  top100: []
+  top100: [],
+  recommends: []
 })
 
 export const mutations = {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   setTop100(state, movies) {
     state.top100 = movies
+  },
+  setRecommends(state, movies) {
+    state.recommends = movies
   },
   addSelectedMovie(state, movie) {
     state.user.selectedMovies = [...state.user.selectedMovies, movie]
@@ -33,7 +37,12 @@ export const actions = {
       commit('addSelectedMovie', movie)
     }
   },
-  async loadUser({ commit }) {
+  async loadUser({ state, commit }) {
+    // only load on when no user in state
+    if (state.user === null) {
+      console.log("user already in state")
+      return
+    }
     var headers = {}
     if (process.browser) {
       let userID = localStorage.getItem('userID')
@@ -59,4 +68,24 @@ export const actions = {
         }
       })
   },
+  async loadRecommendations({ state, commit }) {
+    var body = {}
+    if (state.user.selectedMovies) {
+      body.selectedMovies = state.user.selectedMovies
+    }
+    var headers = {}
+    if (process.browser) {
+      let userID = localStorage.getItem('userID')
+      if (userID) {
+        headers.userID = userID
+      }
+    }
+    await this.$axios.post('/recommend', body, { withCredentials: true, headers: headers })
+      .then((res) => {
+        if (res.status === 200) {
+          commit('setUser', res.data.user)
+          commit('setRecommends', res.data.movies)
+        }
+      })
+  }
 }
