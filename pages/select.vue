@@ -92,8 +92,8 @@
             </div>
             <div class="order-3 mt-2 sm:mt-0 flex-shrink-0 w-full sm:order-2 sm:w-auto">
               <div class="rounded-md shadow-sm">
-                <nuxt-link
-                  to="/recommend"
+                <button
+                  @click="continueTapped"
                   v-bind:class="isContinueActive"
                   class="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-blue-600 bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
                 >
@@ -109,7 +109,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                </nuxt-link>
+                </button>
               </div>
             </div>
           </div>
@@ -171,6 +171,13 @@ export default {
     },
   },
   methods: {
+    continueTapped: function () {
+      if (this.selectedMovies.length >= 5) {
+        this.$router.push({
+          path: "/recommend",
+        });
+      }
+    },
     isMovieIn: function (movie) {
       if (!this.selectedMovies.includes(movie)) {
         return "hidden";

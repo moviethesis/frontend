@@ -85,7 +85,12 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
+    "@nuxtjs/robots",
   ],
+  robots: {
+    UserAgent: "*",
+    Disallow: "/",
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

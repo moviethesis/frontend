@@ -26,6 +26,13 @@ export const getters = {
 };
 
 export const mutations = {
+  reset(state) {
+    localStorage.removeItem("userID");
+    state.user = {};
+    state.testGroup = "";
+    state.top100 = [];
+    state.recommends = [];
+  },
   setUser(state, newUser) {
     state.user = newUser;
     state.testGroup = newUser.testGroup;
@@ -134,8 +141,9 @@ export const actions = {
         }
       });
   },
-  async updateUserPrivateData({ state, commit }) {
+  async updateUserPrivateData({ state, commit }, prof) {
     const body = state.user;
+    body.profilic = prof;
     var headers = {};
     if (process.browser) {
       let userID = localStorage.getItem("userID");

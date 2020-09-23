@@ -34,7 +34,10 @@
         <p class="text-base text-xl text-gray-300 mt-2">{{ explainerText }}</p>
 
         <div class="mt-10">
-          <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
+          <div
+            class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 transition duration-150 ease-in-out"
+            v-bind:class="{ 'border-red-600 border-2': showFillOutWarning }"
+          >
             <div class="md:grid md:grid-cols-3 md:gap-6">
               <div class="md:col-span-1">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -43,6 +46,11 @@
                 <p class="mt-1 text-sm leading-5 text-gray-500">
                   Please enter your personal information
                 </p>
+                <div v-if="showFillOutWarning">
+                  <p class="mt-1 text-sm leading-5 text-red-600">
+                    Please fill out data!
+                  </p>
+                </div>
               </div>
               <div class="mt-5 md:mt-0 md:col-span-2">
                 <div class="grid grid-cols-6 gap-6">
@@ -92,6 +100,8 @@
                       id="age"
                       v-model="age"
                       type="number"
+                      min="0"
+                      name="age"
                       class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       required
                     />
@@ -204,13 +214,33 @@
 import countries from "../plugins/countries.js";
 
 export default {
-  data: {
-    isSharePersonalDataToggled: true,
+  data() {
+    return {
+      showFillOutWarning: false,
+    };
   },
   methods: {
     async saveData() {
+      if (
+        this.$store.state.user.country === "NaN" ||
+        this.$store.state.user.gender === "NaN" ||
+        this.$store.state.user.age === 0
+      ) {
+        this.showFillOutWarning = true;
+        return;
+      }
       this.$nuxt.$loading.start();
-      await this.$store.dispatch("updateUserPrivateData");
+      console.log(localStorage.getItem("PROLIFIC_PID"));
+      console.log(localStorage.getItem("STUDY_ID"));
+      console.log(localStorage.getItem("SESSION_ID"));
+      await this.$store.dispatch(
+        "updateUserPrivateData",
+        {
+        PID: localStorage.getItem("PROLIFIC_PID"),
+        SID: localStorage.getItem("STUDY_ID"),
+        SSID: localStorage.getItem("SESSION_ID")
+        }
+      );
       this.$nuxt.$loading.finish();
       this.$router.push({
         path: "/select",
