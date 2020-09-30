@@ -25,12 +25,6 @@
       <h2 class="text-gray-200 text-4xl font-black mb-4">
         Your recommendations
       </h2>
-      <p v-if="isTransparentGroup" class="text-gray-300 text-md mb-8">
-        The recommendations are based on 25.000.000 movie reviews created by
-        160.000 users. Your recommendations are calculated by the Moviethesis
-        algorithm that takes those reviews into account as well as what movies
-        look like those you selected previous.
-      </p>
       <p class="text-gray-300 text-md mb-8">
         Scroll to the bottom when you are ready to
         <span class="font-bold text-blue-300">continue!</span>

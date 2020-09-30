@@ -35,6 +35,8 @@ export const mutations = {
   },
   setUser(state, newUser) {
     state.user = newUser;
+    console.log("settings user");
+    console.log(newUser);
     state.testGroup = newUser.testGroup;
   },
   debugSetGroup(state, group) {
@@ -49,14 +51,23 @@ export const mutations = {
   setUserAge(state, a) {
     state.user.age = a;
   },
+  setUserEducation(state, e) {
+    state.user.education = e;
+  },
+  setUserWork(state, w) {
+    state.user.work = w;
+  },
+  setUserTechknow(state, tk) {
+    state.user.techknow = tk;
+  },
   setUseForRecommendations(state, bool) {
-    state.user.dataControl.useForRecommendations = bool;
+    state.user.useForRecommendations = bool;
   },
   setUseForImprovementsForOthers(state, bool) {
-    state.user.dataControl.useForImprovementsForOthers = bool;
+    state.user.useForImprovementsForOthers = bool;
   },
   setUseForSharing(state, bool) {
-    state.user.dataControl.useForSharing = bool;
+    state.user.useForSharing = bool;
   },
   setTop100(state, movies) {
     state.top100 = movies;
@@ -132,10 +143,13 @@ export const actions = {
         headers.userID = userID;
       }
     }
+    console.log("load recs");
     await this.$axios
       .post("/recommend", body, { withCredentials: true, headers: headers })
       .then((res) => {
         if (res.status === 200) {
+          console.log("res ok");
+          console.log(res.data);
           commit("setUser", res.data.user);
           commit("setRecommends", res.data.rec_list);
         }
@@ -153,6 +167,35 @@ export const actions = {
     }
     await this.$axios
       .post("/update-data", body, { withCredentials: true, headers: headers })
+      .then((res) => {
+        if (res.status === 200) {
+          commit("setUser", res.data);
+        }
+      });
+  },
+  async updateFromExplainer({ state, commit }, json) {
+    const body = {
+      PROLIFIC_PID: json.PID,
+      STUDY_ID: json.SID,
+      SESSION_ID: json.SSID,
+    };
+    body.dataControl = {
+      useForRecommendations: state.user.useForRecommendations,
+      useForImprovementsForOthers: state.user.useForImprovementsForOthers,
+      useForSharing: state.user.useForSharing,
+    };
+    var headers = {};
+    if (process.browser) {
+      let userID = localStorage.getItem("userID");
+      if (userID) {
+        headers.userID = userID;
+      }
+    }
+    await this.$axios
+      .post("/update-from-explainer", body, {
+        withCredentials: true,
+        headers: headers,
+      })
       .then((res) => {
         if (res.status === 200) {
           commit("setUser", res.data);

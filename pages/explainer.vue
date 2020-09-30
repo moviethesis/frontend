@@ -32,85 +32,14 @@
           'Moviethesis' just like Netflix, HBO etc.
         </p>
         <p class="text-base text-xl text-gray-300 mt-2">{{ explainerText }}</p>
+        <p v-if="isTransparentGroup" class="text-gray-300 text-md mb-8 mt-4">
+          The recommendations are based on 25.000.000 movie reviews created by
+          160.000 users. Your recommendations are calculated by the Moviethesis
+          algorithm that takes those reviews into account as well as what movies
+          look like those you selected previous.
+        </p>
 
         <div class="mt-10">
-          <div
-            class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 transition duration-150 ease-in-out"
-            v-bind:class="{ 'border-red-600 border-2': showFillOutWarning }"
-          >
-            <div class="md:grid md:grid-cols-3 md:gap-6">
-              <div class="md:col-span-1">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">
-                  Personal Information
-                </h3>
-                <p class="mt-1 text-sm leading-5 text-gray-500">
-                  Please enter your personal information
-                </p>
-                <div v-if="showFillOutWarning">
-                  <p class="mt-1 text-sm leading-5 text-red-600">
-                    Please fill out data!
-                  </p>
-                </div>
-              </div>
-              <div class="mt-5 md:mt-0 md:col-span-2">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-2">
-                    <label
-                      for="country"
-                      class="block text-sm font-medium leading-5 text-gray-700"
-                      >Country</label
-                    >
-                    <select
-                      id="country"
-                      v-model="country"
-                      class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      required
-                    >
-                      <option v-for="c in countriesList" v-bind:value="c.code">
-                        {{ c.name }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-2">
-                    <label
-                      for="gender"
-                      class="block text-sm font-medium leading-5 text-gray-700"
-                      >Gender</label
-                    >
-                    <select
-                      id="gender"
-                      v-model="gender"
-                      class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      required
-                    >
-                      <option>Female</option>
-                      <option>Male</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-2">
-                    <label
-                      for="age"
-                      class="block text-sm font-medium leading-5 text-gray-700"
-                      >Age</label
-                    >
-                    <input
-                      id="age"
-                      v-model="age"
-                      type="number"
-                      min="0"
-                      name="age"
-                      class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div
             v-if="isControlGroup"
             class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6"
@@ -162,7 +91,7 @@
                           <label
                             for="improve_for_others"
                             class="font-medium text-gray-700"
-                            >Personal data for improving data engine</label
+                            >Help other people</label
                           >
                           <p class="text-gray-500">
                             Allow Moviethesis to use your movie selections to
@@ -211,36 +140,21 @@
 </template>
 
 <script>
-import countries from "../plugins/countries.js";
-
 export default {
-  data() {
-    return {
-      showFillOutWarning: false,
-    };
-  },
   methods: {
     async saveData() {
-      if (
-        this.$store.state.user.country === "NaN" ||
-        this.$store.state.user.gender === "NaN" ||
-        this.$store.state.user.age === 0
-      ) {
-        this.showFillOutWarning = true;
-        return;
-      }
       this.$nuxt.$loading.start();
-      console.log(localStorage.getItem("PROLIFIC_PID"));
-      console.log(localStorage.getItem("STUDY_ID"));
-      console.log(localStorage.getItem("SESSION_ID"));
-      await this.$store.dispatch(
-        "updateUserPrivateData",
-        {
-        PID: localStorage.getItem("PROLIFIC_PID"),
-        SID: localStorage.getItem("STUDY_ID"),
-        SSID: localStorage.getItem("SESSION_ID")
-        }
-      );
+      if (
+        localStorage.getItem("PROLIFIC_PID") &&
+        localStorage.getItem("STUDY_ID") &&
+        localStorage.getItem("SESSION_ID")
+      ) {
+        await this.$store.dispatch("updateFromExplainer", {
+          PID: localStorage.getItem("PROLIFIC_PID"),
+          SID: localStorage.getItem("STUDY_ID"),
+          SSID: localStorage.getItem("SESSION_ID"),
+        });
+      }
       this.$nuxt.$loading.finish();
       this.$router.push({
         path: "/select",
@@ -259,33 +173,9 @@ export default {
         this.$store.commit("debugSetGroup", value);
       },
     },
-    country: {
-      get() {
-        return this.$store.state.user.country;
-      },
-      set(value) {
-        this.$store.commit("setUserCountry", value);
-      },
-    },
-    gender: {
-      get() {
-        return this.$store.state.user.gender;
-      },
-      set(value) {
-        this.$store.commit("setUserGender", value);
-      },
-    },
-    age: {
-      get() {
-        return this.$store.state.user.age;
-      },
-      set(value) {
-        this.$store.commit("setUserAge", value);
-      },
-    },
     useForRecommendations: {
       get() {
-        return this.$store.state.user.dataControl.useForRecommendations;
+        return this.$store.state.user.useForRecommendations;
       },
       set(value) {
         this.$store.commit("setUseForRecommendations", value);
@@ -293,7 +183,7 @@ export default {
     },
     useForImprovementsForOthers: {
       get() {
-        return this.$store.state.user.dataControl.useForImprovementsForOthers;
+        return this.$store.state.user.useForImprovementsForOthers;
       },
       set(value) {
         this.$store.commit("setUseForImprovementsForOthers", value);
@@ -301,14 +191,11 @@ export default {
     },
     useForSharing: {
       get() {
-        return this.$store.state.user.dataControl.useForSharing;
+        return this.$store.state.user.useForSharing;
       },
       set(value) {
         this.$store.commit("setUseForSharing", value);
       },
-    },
-    countriesList() {
-      return countries;
     },
     isTransparentGroup() {
       return this.$store.getters.isTransparentGroup;
