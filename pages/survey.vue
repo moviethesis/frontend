@@ -1066,7 +1066,7 @@
                 </td>
               </tr>
 
-              <tr class="bg-gray-100">
+              <tr class="border-b-2 border-gray-400 bg-gray-100">
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
