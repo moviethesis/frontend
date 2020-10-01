@@ -1,7 +1,7 @@
 <template>
   <div class="px-5">
     <main class="mt-10 mb-64">
-      <div class="my-6">
+      <!-- <div class="my-6">
         <h2 class="text-gray-200 text-2xl font-black">
           DEBUG OVERWRITE TEST GROUP
         </h2>
@@ -21,7 +21,7 @@
             <option>d</option>
           </select>
         </div>
-      </div>
+      </div> -->
       <h2 class="text-gray-200 text-4xl font-black mb-4">
         Your recommendations
       </h2>

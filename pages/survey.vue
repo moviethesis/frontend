@@ -1125,6 +1125,66 @@
                   />
                 </td>
               </tr>
+
+              <tr class="">
+                <td
+                  class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
+                >
+                  It's important that you pay attention to this study. Please
+                  tick 'STRONGLY AGREE'!
+                  {{ q16 }}
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <input
+                    id="q16.1"
+                    name="q16"
+                    type="radio"
+                    value="1"
+                    v-model="q16"
+                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  />
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <input
+                    id="q16.2"
+                    name="q16"
+                    type="radio"
+                    value="2"
+                    v-model="q16"
+                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  />
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <input
+                    id="q16.3"
+                    name="q16"
+                    type="radio"
+                    value="3"
+                    v-model="q16"
+                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  />
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <input
+                    id="q16.4"
+                    name="q16"
+                    type="radio"
+                    value="4"
+                    v-model="q16"
+                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  />
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <input
+                    id="q16.5"
+                    name="q16"
+                    type="radio"
+                    value="5"
+                    v-model="q16"
+                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                  />
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -1333,6 +1393,7 @@ export default {
       q13: "",
       q14: "",
       q15: "",
+      q16: "",
     };
   },
   computed: {
@@ -1419,7 +1480,8 @@ export default {
         this.q12 === "" ||
         this.q13 === "" ||
         this.q14 === "" ||
-        this.q15 === ""
+        this.q15 === "" ||
+        this.q16 === ""
       ) {
         this.showFillOutSurveyWarning = true;
         return;
@@ -1452,6 +1514,7 @@ export default {
         q13: this.q13,
         q14: this.q14,
         q15: this.q15,
+        q16: this.q16,
       };
       await this.$axios
         .post("/update", body, {
