@@ -144,17 +144,22 @@ export default {
   methods: {
     async saveData() {
       this.$nuxt.$loading.start();
-      if (
-        localStorage.getItem("PROLIFIC_PID") &&
-        localStorage.getItem("STUDY_ID") &&
-        localStorage.getItem("SESSION_ID")
-      ) {
-        await this.$store.dispatch("updateFromExplainer", {
-          PID: localStorage.getItem("PROLIFIC_PID"),
-          SID: localStorage.getItem("STUDY_ID"),
-          SSID: localStorage.getItem("SESSION_ID"),
-        });
-      }
+      // if (
+      //   localStorage.getItem("PROLIFIC_PID") &&
+      //   localStorage.getItem("STUDY_ID") &&
+      //   localStorage.getItem("SESSION_ID")
+      // ) {
+      //   await this.$store.dispatch("updateFromExplainer", {
+      //     PID: localStorage.getItem("PROLIFIC_PID"),
+      //     SID: localStorage.getItem("STUDY_ID"),
+      //     SSID: localStorage.getItem("SESSION_ID"),
+      //   });
+      // }
+      await this.$store.dispatch("updateFromExplainer", {
+        PID: localStorage.getItem("PROLIFIC_PID"),
+        SID: localStorage.getItem("STUDY_ID"),
+        SSID: localStorage.getItem("SESSION_ID"),
+      });
       this.$nuxt.$loading.finish();
       this.$router.push({
         path: "/select",

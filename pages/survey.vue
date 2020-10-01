@@ -50,7 +50,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   Moviethesis provides valuable recommendations to me
-                  {{ q0 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -109,7 +108,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   Moviethesis provides relevant recommendations to me
-                  {{ q1 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -168,7 +166,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   The recommendations from Moviethesis are very trustworthy
-                  {{ q2 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -226,7 +223,7 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  Moviethesis saves me time {{ q3 }}
+                  Moviethesis saves me time
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -330,7 +327,7 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  Moviethesis can be relied on to keep its promises {{ q4 }}
+                  Moviethesis can be relied on to keep its promises
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -389,7 +386,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   Moviethesis usually keeps the promises that it makes to me
-                  {{ q5 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -448,7 +444,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   I can count on Moviethesis to provide a good service
-                  {{ q6 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -507,7 +502,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   Moviethesis seems to be very knowledgeable about the movies it
-                  shows me {{ q7 }}
+                  shows me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -566,7 +561,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   Moviethesis seems to be able to understand my preferences for
-                  this product {{ q8 }}
+                  this product
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -625,7 +620,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   I can rely on Moviethesis for my decision on which movies to
-                  watch {{ q9 }}
+                  watch
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -730,7 +725,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   It bothers me that the firm is able to track information about
-                  me {{ q10 }}
+                  me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -789,7 +784,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   I am concerned that the firm has too much information about me
-                  {{ q11 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -848,7 +842,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   It bothers me that the firm is able to access information
-                  about me {{ q12 }}
+                  about me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -907,7 +901,7 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   I am concerned that my information could be used in ways I
-                  could not foresee {{ q13 }}
+                  could not foresee
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -1012,7 +1006,6 @@
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
                   I felt like I was in full control of my personal data
-                  {{ q14 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -1072,7 +1065,6 @@
                 >
                   I felt like Moviethesis was very transparent about how it got
                   its results and its use of my personal data
-                  {{ q15 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -1132,7 +1124,6 @@
                 >
                   It's important that you pay attention to this study. Please
                   tick 'STRONGLY AGREE'!
-                  {{ q16 }}
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
