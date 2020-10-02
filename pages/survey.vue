@@ -1252,6 +1252,9 @@
                   class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   required
                 />
+                <p v-if="showAgeWarning" class="text-sm text-red-600">
+                  Please enter a number between 1 and 100!
+                </p>
               </div>
 
               <div class="col-span-6">
@@ -1368,6 +1371,7 @@ export default {
     return {
       showFillOutProfileWarning: false,
       showFillOutSurveyWarning: false,
+      showAgeWarning: false,
       q0: "",
       q1: "",
       q2: "",
@@ -1448,12 +1452,25 @@ export default {
         this.$store.state.user.education === "NaN" ||
         this.$store.state.user.work === "NaN" ||
         this.$store.state.user.techknow === "NaN" ||
-        this.$store.state.user.age === 0
+        this.$store.state.user.age === 0 ||
+        isNaN(this.$store.state.user.age) ||
+        this.$store.state.user.age > 100 ||
+        this.$store.state.user.age < 1
       ) {
         this.showFillOutProfileWarning = true;
+        if (
+          isNaN(this.$store.state.user.age) ||
+          this.$store.state.user.age > 100 ||
+          this.$store.state.user.age < 1
+        ) {
+          this.showAgeWarning = true;
+        } else {
+          this.showAgeWarning = false;
+        }
         return;
       } else {
         this.showFillOutProfileWarning = false;
+        this.showAgeWarning = false;
       }
       if (
         this.q0 === "" ||

@@ -27,16 +27,22 @@
           </div>
         </div> -->
         <h2 class="text-gray-200 text-2xl font-black">The scenario</h2>
-        <p class="text-base text-xl text-gray-300 mt-2">
+        <p class="text-md text-gray-300 mt-2">
           Imagine that you are about to use a new streaming service called
-          'Moviethesis' just like Netflix, HBO etc.
+          'Moviethesis' which works similar to popular streaming services like
+          Netflix or HBO.
         </p>
-        <p class="text-base text-xl text-gray-300 mt-2">{{ explainerText }}</p>
+        <p class="text-md text-gray-300 mt-2">
+          Moviethesis offers you
+          <span class="font-bold">personalized</span> recommendations on which
+          movies to watch.
+        </p>
+        <p class="text-md text-gray-300 mt-2">{{ explainerText }}</p>
         <p v-if="isTransparentGroup" class="text-gray-300 text-md mb-8 mt-4">
-          The recommendations are based on 25.000.000 movie reviews created by
-          160.000 users. Your recommendations are calculated by the Moviethesis
-          algorithm that takes those reviews into account as well as what movies
-          look like those you selected previous.
+          The movie recommendations offered by Moviethesis are based on
+          25.000.000 movie reviews created by 160.000 users. Your personalized
+          recommendations are calculated by Moviethesis’ recommendation
+          algorithm using your movie preferences and personal data.
         </p>
 
         <div class="mt-10">
@@ -144,17 +150,6 @@ export default {
   methods: {
     async saveData() {
       this.$nuxt.$loading.start();
-      // if (
-      //   localStorage.getItem("PROLIFIC_PID") &&
-      //   localStorage.getItem("STUDY_ID") &&
-      //   localStorage.getItem("SESSION_ID")
-      // ) {
-      //   await this.$store.dispatch("updateFromExplainer", {
-      //     PID: localStorage.getItem("PROLIFIC_PID"),
-      //     SID: localStorage.getItem("STUDY_ID"),
-      //     SSID: localStorage.getItem("SESSION_ID"),
-      //   });
-      // }
       await this.$store.dispatch("updateFromExplainer", {
         PID: localStorage.getItem("PROLIFIC_PID"),
         SID: localStorage.getItem("STUDY_ID"),
@@ -211,13 +206,13 @@ export default {
     explainerText() {
       var group = this.$store.state.testGroup;
       if (group === "a") {
-        return "Moviethesis offers recommendations on which movies to watch. How exactly the recommendations are made is not public known, and neither is which data they collect and use to make the recommendations.";
+        return "Moviethesis does not offer any information on how exactly its algorithm determines personal recommendations. Moviethesis does not explain which of your personal data they collect and use to make the recommendations.";
       } else if (group === "b") {
-        return "Moviethesis offers recommendations on which movies to watch. How exactly the recommendations are made is not public known. They do, however, let you decide for yourself which of your data will be used to make the recommendations as well as if the recommendation engine may use your data for recommendations to other people.";
+        return "Moviethesis does not offer any information on how exactly its algorithm determines personal recommendations. Moviethesis lets you decide which of your personal data can be used for recommendations.";
       } else if (group === "c") {
-        return "Moviethesis offers recommendations on which movies to watch. How exactly the recommendations are made is not public known, and neither is which data they collect and use to make the recommendations.";
+        return "";
       } else if (group === "d") {
-        return "Moviethesis offers recommendations on which movies to watch. They do, however, let you decide for yourself which of your data will be used to make the recommendations as well as if the recommendation engine may use your data for recommendations to other people.";
+        return "Moviethesis lets you decide which of your personal data can be used for recommendations.";
       }
     },
   },
