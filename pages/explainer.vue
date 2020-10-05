@@ -5,7 +5,7 @@
         <nuxt-link to="/">
           <img class="mx-auto" width="400" src="/MoviethesisLogo.png" />
         </nuxt-link>
-        <div class="my-6">
+        <!-- <div class="my-6">
           <h2 class="text-gray-200 text-2xl font-black">
             DEBUG OVERWRITE TEST GROUP
           </h2>
@@ -25,7 +25,7 @@
               <option>d</option>
             </select>
           </div>
-        </div>
+        </div> -->
         <h2 class="text-gray-200 text-2xl font-black">The scenario</h2>
         <p class="text-md text-gray-300 mt-2">
           Imagine that you are about to use a new streaming service called
