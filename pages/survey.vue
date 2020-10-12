@@ -724,8 +724,8 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  It bothers me that the firm is able to track information about
-                  me
+                  It bothers me that Moviethesis is able to track information
+                  about me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -783,7 +783,8 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  I am concerned that the firm has too much information about me
+                  I am concerned that Moviethesis has too much information about
+                  me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -841,7 +842,7 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  It bothers me that the firm is able to access information
+                  It bothers me that Moviethesis is able to access information
                   about me
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
