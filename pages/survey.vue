@@ -1006,7 +1006,7 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  I felt like I was in full control of my personal data
+                  I could control for which purpose Moviethesis can use my personal data
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
