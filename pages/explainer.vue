@@ -10,10 +10,12 @@
             DEBUG OVERWRITE TEST GROUP
           </h2>
           <div class>
-            <p class="text-base text-xl text-gray-300 mt-2">
+            <p class="text-xl text-gray-300 mt-2">
               Current testgroup (remember to remove in production env):
             </p>
-            <p class="text-sm text-gray-300 mt-1">{{ testGroupDesc }}</p>
+            <p class="text-sm text-gray-300 mt-1 underline">
+              {{ testGroupDesc }}
+            </p>
             <select
               id="testGroup"
               v-model="testGroup"
@@ -27,25 +29,56 @@
           </div>
         </div> -->
         <h2 class="text-gray-200 text-2xl font-black">The scenario</h2>
-        <p class="text-md text-gray-300 mt-2">
+        <p class="text-base text-gray-300 mt-2">
           Imagine that you are about to use a new streaming service called
-          'Moviethesis' which works similar to popular streaming services like
+          'Moviethesis' which works similarly to popular streaming services like
           Netflix or HBO.
         </p>
-        <p class="text-md text-gray-300 mt-2">
+        <p class="text-base text-gray-300 mt-4">
           Moviethesis offers you
-          <span class="font-bold">personalized</span> recommendations on which
-          movies to watch.
+          <span class="font-bold underline">personalized</span> recommendations
+          on which movies to watch.
         </p>
-        <p class="text-md text-gray-300 mt-2">{{ explainerText }}</p>
-        <p v-if="isTransparentGroup" class="text-gray-300 text-md mb-8 mt-4">
+        <!-- <p class="text-md text-gray-300 mt-2">{{ explainerText }}</p> -->
+        <p v-if="isControlGroup" class="text-base text-gray-300 text-md mt-4">
+          Moviethesis
+          <span class="font-bold underline">enables you to</span> control your
+          privacy settings. It lets you decide which of your personal data can
+          be used for recommendations and how it is shared.
+        </p>
+        <p v-else class="text-base text-gray-300 text-md mt-4">
+          Moviethesis <span class="font-bold underline">does not</span> explain
+          which of your personal data they collect. <br />
+          They <span class="font-bold underline">do not</span> let you control
+          your privacy settings and how your personal data is used.
+        </p>
+        <p
+          v-if="isTransparentGroup"
+          class="text-base text-gray-300 text-md mt-4"
+        >
           The movie recommendations offered by Moviethesis are based on
-          25.000.000 movie reviews created by 160.000 users. Your personalized
-          recommendations are calculated by Moviethesis’ recommendation
-          algorithm using your movie preferences and personal data.
+          25.000.000 movie reviews created by 160.000 users.
+          <span class="font-bold underline"
+            >Your personalized recommendations</span
+          >
+          are calculated by Moviethesis’ recommendation algorithm by using the
+          recommendations created by other people and comparing them with your
+          movie selction and personal data. Moviethesis will match new movies
+          for you to watch based on your movie selection profile, which is
+          calculated based on other similar user profiles.
+        </p>
+        <p v-else class="text-base text-gray-300 text-md mt-4">
+          Moviethesis <span class="font-bold underline">does not</span> offer
+          any information on how the system works or how it calculates your
+          movie recommendations.
+          <!-- recommendations or if/how it uses your personal data to make your
+          personal recommendations. -->
         </p>
 
-        <div class="mt-10">
+        <div class="mt-12">
+          <h2 v-if="isControlGroup" class="text-gray-200 text-2xl font-black">
+            Control your privacy settings
+          </h2>
           <div
             v-if="isControlGroup"
             class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6"
@@ -53,10 +86,11 @@
             <div class="md:grid md:grid-cols-3 md:gap-6">
               <div class="md:col-span-1">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
-                  Data control
+                  Privacy Settings
                 </h3>
                 <p class="mt-1 text-sm leading-5 text-gray-500">
-                  Control how your data is used
+                  Control how your personal data is used by Moviethesis and
+                  shared
                 </p>
               </div>
               <div class="mt-5 md:mt-0 md:col-span-2">
@@ -75,11 +109,12 @@
                         <label
                           for="improve_recs"
                           class="font-medium text-gray-700"
-                          >Personal data for improving data engine</label
+                          >Personal data for improving your
+                          recommendations</label
                         >
                         <p class="text-gray-500">
-                          Allow Moviethesis to use your movie selections to
-                          improve the recommendation results for other users
+                          Allow Moviethesis to use your personal data to give
+                          you better perzonalized recommendations
                         </p>
                       </div>
                     </div>
@@ -97,11 +132,11 @@
                           <label
                             for="improve_for_others"
                             class="font-medium text-gray-700"
-                            >Help other people</label
+                            >Improve our services</label
                           >
                           <p class="text-gray-500">
-                            Allow Moviethesis to use your movie selections to
-                            improve the recommendation results for other users
+                            Allow Moviethesis to use your personal data to
+                            improve the recommendation results for all users
                           </p>
                         </div>
                       </div>
@@ -127,6 +162,38 @@
                         </div>
                       </div>
                     </div>
+                    <div class="mt-4">
+                      <div
+                        class="flex items-start"
+                        v-bind:class="{
+                          'border-red-600 border-2 p-2 rounded-md': showDataWarning,
+                        }"
+                      >
+                        <div class="flex items-center h-5">
+                          <input
+                            id="hasUnderstoodDataControl"
+                            v-model="hasUnderstoodDataControl"
+                            type="checkbox"
+                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm leading-5">
+                          <label
+                            for="hasUnderstoodDataControl"
+                            class="font-medium text-gray-700"
+                            >I have checked the settings</label
+                          >
+                          <p class="text-gray-500">
+                            I have checked that the privacy settings are as I
+                            would like
+                          </p>
+                        </div>
+                      </div>
+                      <p class="text-sm text-red-500" v-if="showDataWarning">
+                        Please check that you have understood and marked the
+                        settings as expected
+                      </p>
+                    </div>
                   </div>
                 </fieldset>
               </div>
@@ -147,8 +214,20 @@
 
 <script>
 export default {
+  data() {
+    return {
+      hasUnderstoodDataControl: false,
+      showDataWarning: false,
+    };
+  },
   methods: {
     async saveData() {
+      if (this.isControlGroup && !this.hasUnderstoodDataControl) {
+        this.showDataWarning = true;
+        return;
+      } else {
+        this.showDataWarning = false;
+      }
       this.$nuxt.$loading.start();
       await this.$store.dispatch("updateFromExplainer", {
         PID: localStorage.getItem("PROLIFIC_PID"),

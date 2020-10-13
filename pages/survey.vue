@@ -1006,7 +1006,8 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  I could control for which purpose Moviethesis can use my personal data
+                  I could control for which purpose Moviethesis can use my
+                  personal data
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
@@ -1064,8 +1065,8 @@
                 <td
                   class="border-r-2 border-gray-400 px-6 py-4 text-xs leading-5 font-medium text-gray-700"
                 >
-                  I felt like Moviethesis was very transparent about how it got
-                  its results and its use of my personal data
+                  I felt like Moviethesis was transparent about how the system
+                  works and why it gave me my results
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
                   <input
